@@ -2,7 +2,7 @@ import Head from 'next/head'
 import styles from '../../styles/Admin.module.css'
 import React, {useState, useEffect} from 'react'
 import { useRouter } from 'next/router'
-import { signIn } from 'next-auth/client'
+import { signIn, useSession } from 'next-auth/client'
 
 export default function Login() {
 
@@ -10,6 +10,7 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   const router = useRouter()
+  const [ session, loading ] = useSession()
 
   async function loginAdmin(e) {
     e.preventDefault();
@@ -24,6 +25,9 @@ export default function Login() {
     if (router.query.error) {
       setMessage('Invalid Credentials') // Shown below the input field in my example
     }
+    if (session) {
+      router.push('/admin/dashboard')
+    }
   }, [router])
 
   return (
@@ -37,6 +41,7 @@ export default function Login() {
 
         <div className={styles.grid}>
 
+          {!session && <>
           <form onSubmit={loginAdmin}>
 
             <div>
@@ -58,6 +63,7 @@ export default function Login() {
             <p className="error">{message}</p>
 
           </form>
+          </>}
 
         </div>
 
