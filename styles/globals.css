@@ -14,3 +14,30 @@ a {
 * {
   box-sizing: border-box;
 }
+
+label {
+  margin: 10px;
+}
+input {
+  padding: 10px;
+  margin: 10px;
+  width: 100%;
+}
+
+button {
+  padding: 10px;
+  margin: 10px;
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #000;
+  cursor: pointer;
+}
+
+.center {
+  text-align: center;
+}
+
+.error {
+  color: #f00;
+  margin: 10px;
+}
