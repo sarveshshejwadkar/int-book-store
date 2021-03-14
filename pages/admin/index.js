@@ -36,7 +36,7 @@ export default function Login() {
                 <title>Book Store</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-            <div class="min-h-screen flex items-center justify-center bg-gray-300">
+            <div className="min-h-screen flex items-center justify-center bg-gray-300">
                     {!session && <>
                         <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
                             <div className="rounded-md shadow-sm -space-y-px">

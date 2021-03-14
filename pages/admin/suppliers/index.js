@@ -62,31 +62,35 @@ export default function ListSuppliers() {
             <AdminSideBar />
             <div className="grid col-span-4 bg-gray-300">
                 <div class="rounded m-10 overflow-hidden">
-                    <table className="min-w-full divide-y divide-gray-200">
-                        <thead className="bg-gray-50">
-                            <tr>
-                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Phone</th>
-                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody className="bg-white divide-y divide-gray-200">
-                        {
-                            suppliers.map((supplier) =>
-                                <tr key={supplier._id}>
-                                    <td className="px-6 py-4 whitespace-nowrap">{supplier.name}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap">{supplier.phone}</td>
-                                    <td className="px-6 py-4 whitespace-nowrap">
-                                        <Link href={`/admin/suppliers/${supplier._id}`}>
-                                            <a className="text-red-500">Edit</a>
-                                        </Link>&nbsp;
-                                        <a onClick={() => deleteSupplier(supplier._id)} className="text-blue-500 cursor-pointer">Delete</a>
-                                    </td>
+                    {suppliers.length > 0 ? 
+                        <table className="min-w-full divide-y divide-gray-200">
+                            <thead className="bg-gray-50">
+                                <tr>
+                                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Phone</th>
+                                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                                 </tr>
-                            )
-                        }
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody className="bg-white divide-y divide-gray-200">
+                            {
+                                suppliers.map((supplier) =>
+                                    <tr key={supplier._id}>
+                                        <td className="px-6 py-4 whitespace-nowrap">{supplier.name}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap">{supplier.phone}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap">
+                                            <Link href={`/admin/suppliers/${supplier._id}`}>
+                                                <a className="text-red-500">Edit</a>
+                                            </Link>&nbsp;
+                                            <a onClick={() => deleteSupplier(supplier._id)} className="text-blue-500 cursor-pointer">Delete</a>
+                                        </td>
+                                    </tr>
+                                )
+                            }
+                            </tbody>
+                        </table>
+                        :
+                        <p>No Records Found</p>
+                    }
                 </div>
             </div>
         </div>
