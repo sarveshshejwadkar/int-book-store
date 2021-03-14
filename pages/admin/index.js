@@ -28,7 +28,7 @@ export default function Login() {
     if (session) {
       router.push('/admin/dashboard')
     }
-  }, [router])
+  }, [router, session])
 
   return (
     <div className={styles.container}>

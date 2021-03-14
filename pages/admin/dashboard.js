@@ -1,6 +1,7 @@
 import React, {useEffect} from 'react'
 import { signOut, useSession } from 'next-auth/client'
 import { useRouter } from 'next/router'
+import AdminSidebar from '../../components/admin/AdminSidebar'
 
 function dashboard() {
     const router = useRouter()
