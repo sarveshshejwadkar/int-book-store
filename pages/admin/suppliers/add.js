@@ -32,27 +32,34 @@ export default function Add() {
     }    
 
     return (
-        <div className="container grid grid-cols-5">
+        <div className="grid grid-cols-5">
             <AdminSideBar />
-            <div className="grid col-span-4 m-10">
+            <div className="grid col-span-4 bg-gray-300">
                 <form onSubmit={handleSubmit(onSubmit)}>
-                    <div className="shadow overflow-hidden sm:rounded-md max-w-md">
+                    <div className="shadow overflow-hidden m-10 max-w-md">
                         <div className="p-4 bg-white">
-                            <label for="first_name" className="block text-sm font-medium text-gray-700">Name</label>
-                            <input type="text" name="supplierName" ref={register({ required: true })} onChange={(e) => setSupplierName(e.target.value)} 
-                                className="appearance-none rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" />
+                            <label for="supplierName" className="block py-2">Name</label>
+                            <input 
+                                type="text" 
+                                name="supplierName" 
+                                ref={register({ required: true })} 
+                                onChange={(e) => setSupplierName(e.target.value)} 
+                                className="rounded w-full px-3 py-2 border" />
                             {errors.supplierName && <span className="mt-2 text-sm text-red-500">This field is required</span>}
                         </div>
 
                         <div className="p-4 bg-white">
-                            <label for="first_name" className="block text-sm font-medium text-gray-700">Phone</label>
-                            <input name="phoneNumber" ref={register({ required: true })} onChange={(e) => setPhoneNumber(e.target.value)} 
-                                className="appearance-none rounded-lg relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" />
+                            <label for="phoneNumber" className="block py-2">Phone</label>
+                            <input 
+                                name="phoneNumber" 
+                                ref={register({ required: true })} 
+                                onChange={(e) => setPhoneNumber(e.target.value)} 
+                                className="rounded w-full px-3 py-2 border" />
                             {errors.phoneNumber && <span className="mt-2 text-sm text-red-500">This field is required</span>}
                         </div>
 
                         <div className="p-4 bg-white">
-                            <button type="submit" className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Save</button>
+                            <button type="submit" className="w-full py-3 px-4 rounded text-white bg-indigo-600 hover:bg-indigo-700">Add</button>
                         </div>
 
                     </div>

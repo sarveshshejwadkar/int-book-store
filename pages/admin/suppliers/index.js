@@ -58,10 +58,10 @@ export default function ListSuppliers() {
     }, [setSuppliers])
 
     return (
-        <div className="container grid grid-cols-5">
+        <div className="grid grid-cols-5">
             <AdminSideBar />
-            <div className="grid col-span-4 m-10">
-                <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+            <div className="grid col-span-4 bg-gray-300">
+                <div class="rounded m-10 overflow-hidden">
                     <table className="min-w-full divide-y divide-gray-200">
                         <thead className="bg-gray-50">
                             <tr>
@@ -90,7 +90,6 @@ export default function ListSuppliers() {
                 </div>
             </div>
         </div>
-
     )
 
 }
