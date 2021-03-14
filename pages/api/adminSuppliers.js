@@ -4,14 +4,21 @@ import Supplier from '../../models/Supplier'
 const handler = async (req, res) => {
 
     const { method } = req
+    const { id } = req.query
 
     switch (method) {
-        
+
         case 'GET':
 
-            await Supplier.find({}, function (err, docs) {
-                return res.status(200).send(docs)
-            });
+            if (id) {
+                await Supplier.findById(supplierId, function (err, docs) {
+                    return res.status(200).send(docs)
+                });
+            } else {
+                await Supplier.find({}, function (err, docs) {
+                    return res.status(200).send(docs)
+                });
+            }
 
             break;
 

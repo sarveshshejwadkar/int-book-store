@@ -7,7 +7,7 @@ function AdminSidebar() {
         <div>
             <button onClick={() => signOut()}>Log Out</button>
             <ul>
-                <li>suppliers
+                <li>Suppliers
                     <ul>
                         <li>
                             <Link href="/admin/suppliers/add">
@@ -21,15 +21,15 @@ function AdminSidebar() {
                         </li>
                     </ul>
                 </li>
-                <li>customers
+                <li>Books
                     <ul>
                         <li>
-                            <Link href="/admin/customers/add">
+                            <Link href="/admin/books/add">
                                 <a>Add</a>
                             </Link>
                         </li>
                         <li>
-                            <Link href="/admin/customers">
+                            <Link href="/admin/books">
                                 <a>List</a>
                             </Link>
                         </li>
