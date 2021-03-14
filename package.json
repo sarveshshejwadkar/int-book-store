@@ -15,6 +15,12 @@
     "react": "17.0.1",
     "react-confirm-alert": "^2.7.0",
     "react-dom": "17.0.1",
-    "react-hook-form": "^6.15.4"
+    "react-hook-form": "^6.15.4",
+    "react-pro-sidebar": "^0.6.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.2.5",
+    "postcss": "^8.2.8",
+    "tailwindcss": "^2.0.3"
   }
 }
