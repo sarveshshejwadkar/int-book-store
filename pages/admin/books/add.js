@@ -1,7 +1,8 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { useForm } from "react-hook-form";
 import AdminSideBar from '../../../components/admin/AdminSidebar'
 import { useRouter } from 'next/router'
+import { useSession } from 'next-auth/client'
 
 export default function Add() {
     const { register, handleSubmit, watch, errors } = useForm();
@@ -10,6 +11,13 @@ export default function Add() {
     const [price, setPrice] = useState('');
     const [supplier, setSupplier] = useState('');
     const router = useRouter()
+    const [ session, loading ] = useSession()
+
+    useEffect(() => {
+        if (!loading && !session) {
+          router.push('/admin')
+        }
+    })
 
     const onSubmit = () => {
         try {

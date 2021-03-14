@@ -10,13 +10,13 @@ export default function ListBooks() {
 
     const [ books, setBooks ] = useState([])
     const router = useRouter()
-    const [ session ] = useSession()
+    const [ session, loading ] = useSession()
 
     useEffect(() => {
-        if (!session) {
+        if (!loading && !session) {
           router.push('/admin')
         }
-    }, [router, session])
+    })
 
     const getBooks = async () => {
         const response = await fetch('http://localhost:3000/api/adminBooks')

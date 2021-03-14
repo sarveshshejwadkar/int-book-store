@@ -10,13 +10,13 @@ export default function ListSuppliers() {
 
     const [ suppliers, setSuppliers ] = useState([])
     const router = useRouter()
-    const [ session ] = useSession()
+    const [ session, loading ] = useSession()
 
     useEffect(() => {
-        if (!session) {
+        if (!loading && !session) {
           router.push('/admin')
         }
-    }, [router, session])
+    })
 
     const getSuppliers = async () => {
         const response = await fetch('http://localhost:3000/api/adminSuppliers')
@@ -61,7 +61,7 @@ export default function ListSuppliers() {
         <div className="grid grid-cols-5">
             <AdminSideBar />
             <div className="grid col-span-4 bg-gray-300">
-                <div class="rounded m-10 overflow-hidden">
+                <div className="rounded m-10 overflow-hidden">
                     {suppliers.length > 0 ? 
                         <table className="min-w-full divide-y divide-gray-200">
                             <thead className="bg-gray-50">

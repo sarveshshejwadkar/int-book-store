@@ -1,13 +1,22 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { useForm } from "react-hook-form";
 import AdminSideBar from '../../../components/admin/AdminSidebar'
 import { useRouter } from 'next/router'
+import { useSession } from 'next-auth/client'
 
 export default function Add() {
     const { register, handleSubmit, watch, errors } = useForm();
     const [supplierName, setSupplierName] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const router = useRouter()
+
+    const [ session, loading ] = useSession()
+
+    useEffect(() => {
+        if (!loading && !session) {
+          router.push('/admin')
+        }
+    })
 
     const onSubmit = () => {
         try {
@@ -38,7 +47,7 @@ export default function Add() {
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="shadow overflow-hidden m-10 max-w-md">
                         <div className="p-4 bg-white">
-                            <label for="supplierName" className="block py-2">Name</label>
+                            <label htmlFor="supplierName" className="block py-2">Name</label>
                             <input 
                                 type="text" 
                                 name="supplierName" 
@@ -49,7 +58,7 @@ export default function Add() {
                         </div>
 
                         <div className="p-4 bg-white">
-                            <label for="phoneNumber" className="block py-2">Phone</label>
+                            <label htmlFor="phoneNumber" className="block py-2">Phone</label>
                             <input 
                                 name="phoneNumber" 
                                 ref={register({ required: true })} 

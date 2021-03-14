@@ -5,13 +5,14 @@ import AdminSidebar from '../../components/admin/AdminSidebar'
 
 function dashboard() {
     const router = useRouter()
-    const [ session ] = useSession()
+    const [ session, loading ] = useSession()
 
     useEffect(() => {
-        if (!session) {
+        if (!loading && !session) {
           router.push('/admin')
         }
-    }, [router])
+    })
+
     return (
         <div className="grid grid-cols-5">
             <AdminSidebar />
