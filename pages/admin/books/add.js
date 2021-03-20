@@ -35,7 +35,7 @@ export default function Add() {
                 }
             }).then( response => {
                 if (response.ok) {
-                    // router.push('/admin/books')
+                    router.push('/admin/books')
                 }
             })
         } catch (error) {

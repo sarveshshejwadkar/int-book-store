@@ -24,7 +24,7 @@ export default function ListBooks() {
         setBooks(data)
     }
 
-    const deleteSupplier = async (supplier_id) => {
+    const deleteBook = async (bookId) => {
         confirmAlert({
             title: 'Confirm to submit',
             message: 'Are you sure to do this.',
@@ -33,11 +33,11 @@ export default function ListBooks() {
                 label: 'Yes',
                 onClick: () => {
                     try {
-                        fetch(`http://localhost:3000/api/supplier/${supplier_id}`, {
+                        fetch(`http://localhost:3000/api/book/${bookId}`, {
                                 method: 'DELETE'
                             }).then( response => {
                             if (response.ok) {
-                                getSuppliers()
+                                getBooks()
                             }
                         })
                     } catch (error) {
@@ -80,7 +80,7 @@ export default function ListBooks() {
                                         <Link href={`/admin/books/${book._id}`}>
                                             <a className="text-red-500">Edit</a>
                                         </Link>&nbsp;
-                                        <a onClick={() => deleteSupplier(book._id)} className="text-blue-500 cursor-pointer">Delete</a>
+                                        <a onClick={() => deleteBook(book._id)} className="text-blue-500 cursor-pointer">Delete</a>
                                     </td>
                                 </tr>
                             )

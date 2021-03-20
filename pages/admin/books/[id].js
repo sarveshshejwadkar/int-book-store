@@ -2,35 +2,48 @@ import React, {useState, useEffect} from "react";
 import { useForm } from "react-hook-form";
 import AdminSideBar from '../../../components/admin/AdminSidebar'
 import { useRouter } from 'next/router'
+import { useSession } from 'next-auth/client'
 
 export default function Edit() {
     const { register, handleSubmit, watch, errors } = useForm();
-    const [supplierName, setSupplierName] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
-
+    const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
+    const [price, setPrice] = useState('');
+    const [supplier, setSupplier] = useState('');
     const router = useRouter()
+    const [ session, loading ] = useSession()
     const { id } = router.query
 
-    const getSupplier = async (supplierId) => {
-        const response = await fetch(`http://localhost:3000/api/supplier/${supplierId}`)
+    useEffect(() => {
+        if (!loading && !session) {
+          router.push('/admin')
+        }
+    })
+
+    const getBook = async (bookId) => {
+        const response = await fetch(`http://localhost:3000/api/book/${bookId}`)
         const data = await response.json()
-        setSupplierName(data.name)
-        setPhoneNumber(data.phone)
+        setTitle(data.title)
+        setDescription(data.description)
+        setPrice(data.price)
+        setSupplier(data.supplier)
     }
 
     useEffect(() => {
         if (id) {
-            getSupplier(id)
+            getBook(id)
         }
     }, [id])
 
-    const onSubmit = data => {
+    const onSubmit = () => {
         try {
-            fetch(`http://localhost:3000/api/supplier/${id}`, {
+            fetch(`http://localhost:3000/api/book/${id}`, {
                 method: 'PUT',
                 body: JSON.stringify({ 
-                    supplierName: supplierName,
-                    phoneNumber: phoneNumber
+                    title: title,
+                    description: description,
+                    price: price,
+                    supplier: supplier
                 }) ,
                 headers: {
                 accept: '*/*',
@@ -38,7 +51,7 @@ export default function Edit() {
                 }
             }).then( response => {
                 if (response.ok) {
-                    router.push('/admin/suppliers')
+                    router.push('/admin/books')
                 }
             })
         } catch (error) {
@@ -53,32 +66,54 @@ export default function Edit() {
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="shadow overflow-hidden m-10 max-w-md">
                         <div className="p-4 bg-white">
-                            <label htmlFor="supplierName" className="block py-2">Name</label>
-                            <input
+                            <label htmlFor="title" className="block py-2">Title</label>
+                            <input 
                                 type="text" 
-                                name="supplierName" 
-                                defaultValue={supplierName} 
+                                name="title" 
+                                defaultValue={title} 
                                 ref={register({ required: true })} 
-                                onChange={(e) => setSupplierName(e.target.value)} 
-                                className="w-full rounded block px-3 py-2 border" />
-                            {errors.supplierName && <span className="mt-2 text-sm text-red-500">This field is required</span>}
-                        </div>
-
-                        <div className="p-4 bg-white">
-                            <label for="phoneNumber" className="block py-2">Phone</label>
-                            <input
-                                type="text"
-                                name="phoneNumber" 
-                                defaultValue={phoneNumber} 
-                                ref={register({ required: true })} 
-                                onChange={(e) => setPhoneNumber(e.target.value)} 
+                                onChange={(e) => setTitle(e.target.value)} 
                                 className="rounded w-full px-3 py-2 border" />
-                            {errors.phoneNumber && <span className="mt-2 text-sm text-red-500">This field is required</span>}
+                            {errors.title && <span className="mt-2 text-sm text-red-500">This field is required</span>}
                         </div>
 
                         <div className="p-4 bg-white">
-                            <button type="submit" className="w-full py-3 px-4 rounded text-white bg-indigo-600 hover:bg-indigo-700" >
-                                Update</button>
+                            <label htmlFor="description" className="block py-2">Description</label>
+                            <textarea 
+                                name="description" 
+                                defaultValue={description} 
+                                ref={register({ required: true })} 
+                                onChange={(e) => setDescription(e.target.value)} 
+                                className="rounded w-full px-3 py-2 border" ></textarea>
+                            {errors.description && <span className="mt-2 text-sm text-red-500">This field is required</span>}
+                        </div>
+
+                        <div className="p-4 bg-white">
+                            <label htmlFor="price" className="block py-2">Price</label>
+                            <input 
+                                type="text" 
+                                name="price" 
+                                defaultValue={price} 
+                                ref={register({ required: true })} 
+                                onChange={(e) => setPrice(e.target.value)} 
+                                className="rounded w-full px-3 py-2 border" />
+                            {errors.price && <span className="mt-2 text-sm text-red-500">This field is required</span>}
+                        </div>
+
+                        <div className="p-4 bg-white">
+                            <label htmlFor="supplier" className="block py-2">Supplier</label>
+                            <input 
+                                type="text" 
+                                name="supplier" 
+                                defaultValue={supplier} 
+                                ref={register({ required: true })} 
+                                onChange={(e) => setSupplier(e.target.value)} 
+                                className="rounded w-full px-3 py-2 border" />
+                            {errors.supplier && <span className="mt-2 text-sm text-red-500">This field is required</span>}
+                        </div>
+
+                        <div className="p-4 bg-white">
+                            <button type="submit" className="w-full py-3 px-4 rounded text-white bg-indigo-600 hover:bg-indigo-700">Update</button>
                         </div>
 
                     </div>
