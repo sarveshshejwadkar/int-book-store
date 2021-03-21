@@ -13,10 +13,14 @@ export default function Success() {
     return (
         <div className="p-8 h-screen">
             <Navbar />
-            <h1>Thanks for your order!</h1>
-            <p>
-                We appreciate your business!
-            </p>
+            <div className="flex justify-center">
+                <div className="my-6">
+                    <h1>Thanks for your order!</h1>
+                    <p>
+                        We appreciate your business!
+                    </p>
+                </div>
+            </div>
         </div>
     )
 }

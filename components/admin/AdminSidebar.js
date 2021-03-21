@@ -35,6 +35,7 @@ function AdminSidebar() {
                         </li>
                     </ul>
                 </li>
+                <li className="my-5"><Link href='/admin/orders'>Orders</Link></li>
             </ul>
         </div>
     )
