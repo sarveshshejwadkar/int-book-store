@@ -62,6 +62,12 @@ export default function ListBooks() {
             <AdminSideBar />
             <div className="grid col-span-4 bg-gray-300">
                 <div className="rounded m-10 overflow-hidden">
+                    <div className="flex bg-white py-3 px-5">
+                        <h1 className="py-2">Books</h1>
+                        <Link href="/admin/books/add" >
+                            <button className="mx-5 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Add</button>
+                        </Link>
+                    </div>
                     <table className="min-w-full divide-y divide-gray-200">
                         <thead className="bg-gray-50">
                             <tr>
