@@ -34,7 +34,26 @@ export default function Cart({sessionId}) {
 
     const checkOut = async (event) => {
         const stripe = await stripePromise;
-        const response = await fetch('http://localhost:3000/api/stripeCheckoutSession', { method: 'POST' });
+        const lineItems = cartItems.map((item) => {
+            return {
+                price_data: {
+                    currency: 'usd',
+                    product_data: {
+                        name: item.book.title,
+                    },
+                    unit_amount: item.book.price,
+                },
+                quantity: item.quantity
+            }
+        })
+        const response = await fetch('http://localhost:3000/api/stripeCheckoutSession', { 
+            method: 'POST',
+            body: JSON.stringify({lineItems: lineItems}),
+            headers: {
+                accept: '*/*',
+                'Content-Type': 'application/json'
+            }
+        });
         const session = await response.json();
 
         const result = await stripe.redirectToCheckout({
@@ -57,7 +76,6 @@ export default function Cart({sessionId}) {
                                 <table className="w-full text-sm lg:text-base" cellSpacing="0">
                                     <thead>
                                         <tr className="h-12 uppercase">
-                                            <th className="hidden md:table-cell"></th>
                                             <th className="text-left">Product</th>
                                             <th className="lg:text-right text-left pl-5 lg:pl-0">
                                             <span className="lg:hidden" title="Quantity">Qtd</span>
@@ -71,11 +89,6 @@ export default function Cart({sessionId}) {
                                     {
                                         cartItems.map((item) =>
                                             <tr key={item._id}>
-                                                <td className="hidden pb-4 md:table-cell">
-                                                    <a href="#">
-                                                        <img src="https://limg.app/i/Calm-Cormorant-Catholic-Pinball-Blaster-yM4oub.jpeg" className="w-20 rounded" alt="Thumbnail" />
-                                                    </a>
-                                                </td>
                                                 <td>
                                                 <a href="#">
                                                     <p className="mb-2 md:ml-4">{item.book.title}</p>
