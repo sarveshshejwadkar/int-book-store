@@ -11,7 +11,7 @@ const handler = async (req, res) => {
         case 'GET':
 
             if (id) {
-                await Supplier.findById(supplierId, function (err, docs) {
+                await Supplier.findById(id, function (err, docs) {
                     return res.status(200).send(docs)
                 });
             } else {

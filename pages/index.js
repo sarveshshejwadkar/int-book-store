@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { applySession } from 'next-session'
+import Navbar from '../components/Navbar'
 
 export async function getServerSideProps({ req, res }) {
     await applySession(req, res, {});
@@ -20,7 +21,7 @@ export default function Home({sessionId}) {
 
     const addToCart = async (bookId) => {
         try {
-            const result = fetch('http://localhost:3000/api/addToCart', {
+            const result = fetch('http://localhost:3000/api/cart', {
                 method: 'POST',
                 body: JSON.stringify({
                     sessionId: sessionId,
@@ -44,6 +45,7 @@ export default function Home({sessionId}) {
     
     return (
         <div className="p-8 h-screen">
+            <Navbar />
             <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-6">
             {
                 books.map((book) =>

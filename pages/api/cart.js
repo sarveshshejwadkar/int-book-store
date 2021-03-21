@@ -10,14 +10,14 @@ const handler = async (req, res) => {
         case 'POST':
             const { sessionId, bookId } = req.body;
             try {
-                const query = { sessionId: sessionId, bookId: bookId };
+                const query = { sessionId: sessionId, book: bookId };
                 const result = await Cart.findOneAndUpdate(query, { $inc: {quantity: 1 }})
                 if (result)
                     return res.status(200).send(result);
                 else {
                     const cart = new Cart({ 
                         sessionId: sessionId,
-                        bookId: bookId,
+                        book: bookId,
                         quantity: 1
                     });
                     cart.save(function (err, cart) {
@@ -29,7 +29,6 @@ const handler = async (req, res) => {
             } catch (error) {
                 return res.status(500).send(error.message);
             }
-            return res.status(200)
             break;
         
         default:

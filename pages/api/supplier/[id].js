@@ -1,6 +1,5 @@
 import connectDB from '../../../models/Mongodb'
 import Supplier from '../../../models/Supplier'
-import mongoose from 'mongoose'
 
 const handler = async (req, res) => {
 
