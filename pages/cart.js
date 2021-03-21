@@ -41,14 +41,17 @@ export default function Cart({sessionId}) {
                     product_data: {
                         name: item.book.title,
                     },
-                    unit_amount: item.book.price,
+                    unit_amount: item.book.price * 100,
                 },
                 quantity: item.quantity
             }
         })
         const response = await fetch('http://localhost:3000/api/stripeCheckoutSession', { 
             method: 'POST',
-            body: JSON.stringify({lineItems: lineItems}),
+            body: JSON.stringify({
+                lineItems: lineItems,
+                sessionId: sessionId
+            }),
             headers: {
                 accept: '*/*',
                 'Content-Type': 'application/json'
